@@ -11,6 +11,8 @@ namespace Dsw2026Ej15.Domain.Interfaces
 
         void SaveDoctor(Doctor doctor);
 
-        List<Doctor> GetAllDoctors();
+        Task<List<Doctor>> GetAllDoctorsAsync();
+
+        Task<Doctor?> GetDoctorByIdAsync(Guid id);
     }
 }

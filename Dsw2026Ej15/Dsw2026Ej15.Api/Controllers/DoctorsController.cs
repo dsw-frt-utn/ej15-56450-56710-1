@@ -40,7 +40,9 @@ namespace Dsw2026Ej15.Api.Controllers
         [HttpGet("doctors")]
         public async Task<IActionResult> GetDoctors()
         {
-            var doctors = _persistence.GetAllDoctors();
+            
+            var doctors = await _persistence.GetAllDoctorsAsync();
+
             return Ok(doctors);
         }
 

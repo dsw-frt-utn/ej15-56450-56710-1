@@ -15,9 +15,11 @@ namespace Dsw2026Ej15.Data
             LoadSpecialities();
         }
 
-        public List<Doctor> GetAllDoctors()
+        public Task<List<Doctor>> GetAllDoctorsAsync()
         {
-            return _doctors.Where(d => d.IsActive).ToList();
+            
+            var doctors = _doctors.Where(d => d.IsActive).ToList();
+            return Task.FromResult(doctors);
         }
 
         public Speciality? GetSpecialityById(Guid id)
@@ -45,6 +47,12 @@ namespace Dsw2026Ej15.Data
             catch (Exception)
             {
             }
+        }
+
+        public Task<Doctor?> GetDoctorByIdAsync(Guid id)
+        {
+            var doctor = _doctors.SingleOrDefault(d => d.Id == id && d.IsActive);
+            return Task.FromResult(doctor);
         }
     }
 }

@@ -4,5 +4,6 @@
     {
         public record Request(string Name, string LicenseNumber, Guid SpecialityId);
 
-    }
+        public record ResponseTE(string Name, string LicenseNumber, string SpecialityName);
+}
 
