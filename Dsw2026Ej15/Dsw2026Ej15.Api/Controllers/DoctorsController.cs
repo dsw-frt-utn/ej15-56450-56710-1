@@ -43,5 +43,25 @@ namespace Dsw2026Ej15.Api.Controllers
             var doctors = _persistence.GetAllDoctors();
             return Ok(doctors);
         }
+
+        [HttpGet("doctors/{id:guid}")]
+        public async Task<IActionResult> GetDoctorById(Guid id)
+        {
+           
+            var doctor = await _persistence.GetDoctorByIdAsync(id);
+          
+            if (doctor is null)
+            {
+                return NotFound("El doctor solicitado no existe o no está disponible.");
+            }
+           
+            var response = new DoctorModel.ResponseTE(
+                doctor.Name,
+                doctor.LicenseNumber,
+                doctor.Speciality.Name
+            );
+
+            return Ok(response);
+        }
     }
 }
