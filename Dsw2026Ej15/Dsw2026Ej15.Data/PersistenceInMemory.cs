@@ -52,6 +52,7 @@ namespace Dsw2026Ej15.Data
         public Task<Doctor?> GetDoctorByIdAsync(Guid id)
         {
             var doctor = _doctors.SingleOrDefault(d => d.Id == id && d.IsActive);
+
             return Task.FromResult(doctor);
         }
     }
