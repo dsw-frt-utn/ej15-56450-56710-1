@@ -18,5 +18,10 @@ namespace Dsw2026Ej15.Domain.Entities
             Speciality = speciality;
             IsActive = true;
         }
+
+        public void Desactivar()
+        {
+            IsActive = false;
+        }
     }
 }
