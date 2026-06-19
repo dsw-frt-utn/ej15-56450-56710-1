@@ -7,7 +7,7 @@ namespace Dsw2026Ej15.Api.Controllers
 {
     [ApiController]
     [Route("api")]
-    
+
     public class DoctorsController : ControllerBase
     {
         private readonly IPersistence _persistence;
@@ -20,14 +20,14 @@ namespace Dsw2026Ej15.Api.Controllers
         [HttpPost("doctors")]
         public async Task<IActionResult> CreateDoctor(DoctorModel.Request request)
         {
-            if(string.IsNullOrWhiteSpace(request.Name) || string.IsNullOrWhiteSpace(request.LicenseNumber))
+            if (string.IsNullOrWhiteSpace(request.Name) || string.IsNullOrWhiteSpace(request.LicenseNumber))
             {
                 return BadRequest("Nombre y Matricula son requeridos");
             }
 
             var speciality = _persistence.GetSpecialityById(request.SpecialityId);
-            if (speciality is null) 
-            { 
+            if (speciality is null)
+            {
                 return BadRequest("Especialidad no encontrada");
             }
 
@@ -35,6 +35,13 @@ namespace Dsw2026Ej15.Api.Controllers
             _persistence.SaveDoctor(doctor);
 
             return Created();
+        }
+
+        [HttpGet("doctors")]
+        public async Task<IActionResult> GetDoctors()
+        {
+            var doctors = _persistence.GetAllDoctors();
+            return Ok(doctors);
         }
     }
 }
